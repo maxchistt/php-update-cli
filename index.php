@@ -33,7 +33,7 @@ if ($rebase) {
 
     $command1 = "cd ../ && cd $pname && git pull --all && cd ../";
     $command2 = "cd ../ && cd $pname && git reset --hard origin && cd ../";
-    $command3 = ($mode == 'node' or $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : "";
+    $command3 = ($mode == 'node' || $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : "";
     $command4 = ($mode == 'react') ? "cd ../ && cd $pname && npm run build && cd ../" : "";
     $command5 = ($mode == 'node' or $mode == 'react') ? "cd ../ && pm2 restart ecosystem.config.js && cd ./" : "";
 
