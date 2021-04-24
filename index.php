@@ -33,7 +33,7 @@ if ($rebase) {
 
     $command1 = "cd ../ && cd $pname && git pull --all && cd ../";
     $command2 = "cd ../ && cd $pname && git reset --hard origin && cd ../";
-    $command3 = ($mode == 'node' || $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : $mode == 'mern' ? "cd ../ && cd $pname && npm run deploy && cd ../" : "";
+    $command3 = ($mode == 'node' || $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : (($mode == 'mern') ? "cd ../ && cd $pname && npm run deploy && cd ../" : "");
     $command4 = ($mode == 'react') ? "cd ../ && cd $pname && npm run build && cd ../" : "";
     $command5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern') ? "cd ../ && pm2 restart ecosystem.config.js && cd ./" : "";
 
@@ -162,9 +162,9 @@ $dirlist = array_values(array_filter(scandir("../"), function ($dirname) {
                                     $dirmode = in_array("package.json", scandir("../$dir"))
                                         ? ((in_array("public", scandir("../$dir")) && in_array("src", scandir("../$dir")))
                                             ? "react"
-                                            : (in_array("client", scandir("../$dir")))
-                                            ? "mern"
-                                            : "node")
+                                            : ((in_array("client", scandir("../$dir")))
+                                                ? "mern"
+                                                : "node"))
                                         : "other";
                                 ?>
                                     <div class='m-2'>
