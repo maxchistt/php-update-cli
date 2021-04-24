@@ -33,8 +33,8 @@ if ($rebase) {
 
     $command1 = "cd ../ && cd $pname && git pull --all && cd ../";
     $command2 = "cd ../ && cd $pname && git reset --hard origin && cd ../";
-    $command3 = ($mode == 'node' || $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : (($mode == 'mern') ? "cd ../ && cd $pname && npm run deploy && cd ../" : "");
-    $command4 = ($mode == 'react') ? "cd ../ && cd $pname && npm run build && cd ../" : "";
+    $command3 = ($mode == 'node' || $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : (($mode == 'mern') ? "cd ../ && cd $pname && npm install && cd client && npm install && cd ./ && cd ../" : "");
+    $command4 = ($mode == 'react') ? "cd ../ && cd $pname && npm run build && cd ../" : (($mode == 'mern') ? "cd ../ && cd $pname && cd client && npm run build && cd ./ && cd ../" : "");
     $command5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern') ? "cd ../ && pm2 restart ecosystem.config.js && cd ./" : "";
 
     $command = false;
