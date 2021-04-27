@@ -42,10 +42,10 @@ if ($rebase) {
     $config = '';
     switch ($stage) {
         case 1:
+            $config = "pName: " . $pname . " mode: " . $mode . PHP_EOL;
             $command = $command1;
             break;
         case 2:
-            $config = "pName: " . $pname . " mode: " . $mode . PHP_EOL;
             $command = $command2;
             break;
         case 3:
