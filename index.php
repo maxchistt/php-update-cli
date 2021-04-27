@@ -39,12 +39,13 @@ if ($rebase) {
     $command5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern') ? "cd ../ && pm2 restart ecosystem.config.js && cd ./" : "";
 
     $command = false;
+    $config = '';
     switch ($stage) {
         case 1:
             $command = $command1;
             break;
         case 2:
-            echo "pName: " . $pname . " mode: " . $mode;
+            $config = "pName: " . $pname . " mode: " . $mode . PHP_EOL;
             $command = $command2;
             break;
         case 3:
@@ -61,7 +62,7 @@ if ($rebase) {
             break;
     }
 
-    $output = $command ? $oldOutput . PHP_EOL . (string)(shell_exec($command)) : ($oldOutput ? $oldOutput : "no command...");
+    $output = $command ? $oldOutput . PHP_EOL . $config . (string)(shell_exec($command)) : ($oldOutput ? $oldOutput : "no command...");
 
     $outputFinEncode = base64url_encode($output);
     $pnameFinEncode = base64url_encode($pname);
