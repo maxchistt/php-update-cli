@@ -44,6 +44,7 @@ if ($rebase) {
             $command = $command1;
             break;
         case 2:
+            echo "pName: " . $pname . " mode: " . $mode;
             $command = $command2;
             break;
         case 3:
