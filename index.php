@@ -32,37 +32,54 @@ if ($rebase) {
 
     $stage++;
 
-    $command1 = "cd ../ && cd $pname && git pull --all && cd ../";
-    $command2 = "cd ../ && cd $pname && git reset --hard origin && cd ../";
-    $command3 = ($mode == 'node' || $mode == 'react') ? "cd ../ && cd $pname && npm install && cd ../" : (($mode == 'mern') ? "cd ../ && cd $pname && npm install && cd client && npm install && cd ./ && cd ../" : "");
-    $command4 = ($mode == 'react') ? "cd ../ && cd $pname && npm run build && cd ../" : (($mode == 'mern') ? "cd ../ && cd $pname && cd client && npm run build && cd ./ && cd ../" : "");
-    $command5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern') ? "cd ../ && pm2 restart ecosystem.config.js && cd ./" : "";
+    $commands1 = ["cd ../ && cd $pname && git pull --all && cd ../"];
+    $commands2 = ["cd ../ && cd $pname && git reset --hard origin && cd ../"];
+    $commands3 = ($mode == 'node' || $mode == 'react')
+        ? ["cd ../ && cd $pname && npm install && cd ../"]
+        : (($mode == 'mern')
+            ? ["cd ../ && cd $pname && npm install && cd ../", "cd ../ && cd $pname/client && npm install && cd ./ && cd ../"]
+            : [""]);
+    $commands4 = ($mode == 'react')
+        ? ["cd ../ && cd $pname && npm run build && cd ../"]
+        : (($mode == 'mern')
+            ? ["cd ../ && cd $pname && cd client && npm run build && cd ./ && cd ../"]
+            : [""]);
+    $commands5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern')
+        ? ["cd ../ && pm2 restart ecosystem.config.js && cd ./"]
+        : [""];
 
-    $command = false;
+
+    $commands = null;
     $config = '';
     switch ($stage) {
         case 1:
             $config = "pName: " . $pname . " mode: " . $mode . PHP_EOL;
-            $command = $command1;
+            $commands = $commands1;
             break;
         case 2:
-            $command = $command2;
+            $commands = $commands2;
             break;
         case 3:
-            $command = $command3;
+            $commands = $commands3;
             break;
         case 4:
-            $command = $command4;
+            $commands = $commands4;
             break;
         case 5:
-            $command = $command5;
+            $commands = $commands5;
             break;
         default:
-            $command = false;
+            $commands = false;
             break;
     }
 
-    $output = $command ? $oldOutput . PHP_EOL . $config . (string)(shell_exec($command)) : ($oldOutput ? $oldOutput : "no command...");
+    $res = "";
+
+    foreach ($commands as $value) {
+        $res .= (string)(shell_exec($value));
+    }
+
+    $output = $commands ? $oldOutput . PHP_EOL . $config . $res : ($oldOutput ? $oldOutput : "no commands...");
 
     $outputFinEncode = base64url_encode($output);
     $pnameFinEncode = base64url_encode($pname);
