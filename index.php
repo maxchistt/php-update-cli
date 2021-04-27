@@ -38,15 +38,15 @@ if ($rebase) {
         ? ["cd ../ && cd $pname && npm install && cd ../"]
         : (($mode == 'mern')
             ? ["cd ../ && cd $pname && npm install && cd ../", "cd ../ && cd $pname/client && npm install && cd ./ && cd ../"]
-            : [""]);
+            : [" "]);
     $commands4 = ($mode == 'react')
         ? ["cd ../ && cd $pname && npm run build && cd ../"]
         : (($mode == 'mern')
             ? ["cd ../ && cd $pname && cd client && npm run build && cd ./ && cd ../"]
-            : [""]);
+            : [" "]);
     $commands5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern')
         ? ["cd ../ && pm2 restart ecosystem.config.js && cd ./"]
-        : [""];
+        : [" "];
 
 
     $commands = null;
@@ -79,7 +79,7 @@ if ($rebase) {
         $res .= (string)(shell_exec($value));
     }
 
-    $output = $commands ? $oldOutput . PHP_EOL . $config . $res : ($oldOutput ? $oldOutput : "no commands...");
+    $output = $commands ? $oldOutput . PHP_EOL . (string)($config) . (string)($res) : ($oldOutput ? $oldOutput : "no commands...");
 
     $outputFinEncode = base64url_encode($output);
     $pnameFinEncode = base64url_encode($pname);
