@@ -69,7 +69,7 @@ if ($rebase) {
             $commands = $commands5;
             break;
         default:
-            $commands = false;
+            $commands = null;
             break;
     }
 
