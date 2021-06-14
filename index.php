@@ -45,7 +45,7 @@ if ($rebase) {
             ? ["cd ../ && cd $pname && cd client && npm run build && cd ./ && cd ../"]
             : [" "]);
     $commands5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern')
-        ? ["cd ../ && pm2 restart ecosystem.config.js && cd ./"]
+        ? ["cd ../ && pm2 restart ecosystem.config.js && cd $pname && npm run doc && cd ../"]
         : [" "];
 
 
