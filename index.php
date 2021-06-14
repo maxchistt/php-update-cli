@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: *');
-set_time_limit(60);
+set_time_limit(120);
 ?>
 
 <!doctype html>
