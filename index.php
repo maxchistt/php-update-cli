@@ -40,7 +40,7 @@ if ($rebase) {
     if($mode == 'commit'){
         $commands1 = ["cd ../ && cd $pname && git add . && cd ../"];
         $commands2 = ["cd ../ && cd $pname && git commit -m \"remote commit\" && cd ../"];
-        $commands3 = [" "];
+        $commands3 = ["cd ../ && cd $pname && git push && cd ../"];
         $commands4 =  [" "];
         $commands5 =  [" "];
     }else{
