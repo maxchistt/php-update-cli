@@ -31,22 +31,35 @@ if ($rebase) {
     if (stripos($pname, ".") !== false || stripos($pname, "/") !== false || stripos($pname, " ") !== false) exit("wrong name");
 
     $stage++;
+    $commands1;
+    $commands2;
+    $commands3;
+    $commands4;
+    $commands5;
 
-    $commands1 = ["cd ../ && cd $pname && git pull --all && cd ../"];
-    $commands2 = ["cd ../ && cd $pname && git reset --hard origin && cd ../"];
-    $commands3 = ($mode == 'node' || $mode == 'react')
-        ? ["cd ../ && cd $pname && npm install && cd ../"]
-        : (($mode == 'mern')
-            ? ["cd ../ && cd $pname && npm install && cd ../", "cd ../ && cd $pname/server && npm install && cd ../ && cd ../", "cd ../ && cd $pname/client && npm install && cd ../ && cd ../"]
-            : [" "]);
-    $commands4 = ($mode == 'react')
-        ? ["cd ../ && cd $pname && npm run build && cd ../"]
-        : (($mode == 'mern')
-            ? ["cd ../ && cd $pname && cd client && npm run build && cd ../ && cd ../"]
-            : [" "]);
-    $commands5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern')
-        ? ["cd ../ && pm2 restart ecosystem.config.js","cd ../ && cd $pname && npm run doc && cd ../"]
-        : [" "];
+    if($mode == 'commit'){
+        $commands1 = ["cd ../ && cd $pname && git add . && cd ../"];
+        $commands2 = ["cd ../ && cd $pname && git commit -m \"remote commit\" && cd ../"];
+        $commands3 = [" "];
+        $commands4 =  [" "];
+        $commands5 =  [" "];
+    }else{
+        $commands1 = ["cd ../ && cd $pname && git pull --all && cd ../"];
+        $commands2 = ["cd ../ && cd $pname && git reset --hard origin && cd ../"];
+        $commands3 = ($mode == 'node' || $mode == 'react')
+            ? ["cd ../ && cd $pname && npm install && cd ../"]
+            : (($mode == 'mern')
+                ? ["cd ../ && cd $pname && npm install && cd ../", "cd ../ && cd $pname/server && npm install && cd ../ && cd ../", "cd ../ && cd $pname/client && npm install && cd ../ && cd ../"]
+                : [" "]);
+        $commands4 = ($mode == 'react')
+            ? ["cd ../ && cd $pname && npm run build && cd ../"]
+            : (($mode == 'mern')
+                ? ["cd ../ && cd $pname && cd client && npm run build && cd ../ && cd ../"]
+                : [" "]);
+        $commands5 = ($mode == 'node' or $mode == 'react' or $mode == 'mern')
+            ? ["cd ../ && pm2 restart ecosystem.config.js","cd ../ && cd $pname && npm run doc && cd ../"]
+            : [" "];
+    }
 
 
     $commands = null;
@@ -192,6 +205,11 @@ $dirlist = array_values(array_filter(scandir("../"), function ($dirname) {
                                                 $dirEncode = base64url_encode($dir);
                                                 $dirmodeEncode = base64url_encode($dirmode); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?> class='btn btn-primary btn-block text-left'>
                                             <span class="badge badge-primary mr-1"><?= ++$key; ?></span><?= $dir; ?>
+                                        </a>
+                                        <a <?php if ($hrefEnable) :
+                                                $dirEncode = base64url_encode($dir);
+                                                $dirmodeEncode = base64url_encode("commit"); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?> class='btn btn-primary btn-block text-left'>
+                                            <span class="badge badge-primary mr-1"><?= ++$key; ?></span> Commit
                                         </a>
                                     </div>
                                 <?php endforeach; ?>
