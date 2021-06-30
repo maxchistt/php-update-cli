@@ -219,7 +219,7 @@ $dirlist = array_values(array_filter(scandir("../"), function ($dirname) {
                                             <a class='h-100 btn btn-primary btn-block text-left' <?php if ($hrefEnable) :
                                                     $dirEncode = base64url_encode($dir);
                                                     $dirmodeEncode = base64url_encode("commit"); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?>>
-                                                    Commit
+                                                    ⇄
                                             </a>
                                         </div>
                                     </div>
