@@ -201,16 +201,20 @@ $dirlist = array_values(array_filter(scandir("../"), function ($dirname) {
                                         : "other";
                                 ?>
                                     <div class='m-2 row'>
-                                        <a class='col-9 btn btn-primary btn-block text-left' <?php if ($hrefEnable) :
-                                                $dirEncode = base64url_encode($dir);
-                                                $dirmodeEncode = base64url_encode($dirmode); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?>>
-                                            <span class="badge badge-primary mr-1"><?= ++$key; ?></span><?= $dir; ?>
-                                        </a>
-                                        <a class='col-3 btn btn-primary btn-block text-left' <?php if ($hrefEnable) :
-                                                $dirEncode = base64url_encode($dir);
-                                                $dirmodeEncode = base64url_encode("commit"); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?>>
-                                                Commit
-                                        </a>
+                                        <div class="col-9">
+                                            <a class='h-100 btn btn-primary btn-block text-left' <?php if ($hrefEnable) :
+                                                    $dirEncode = base64url_encode($dir);
+                                                    $dirmodeEncode = base64url_encode($dirmode); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?>>
+                                                <span class="badge badge-primary mr-1"><?= ++$key; ?></span><?= $dir; ?>
+                                            </a>
+                                        </div>
+                                        <div class="col-3">
+                                            <a class='h-100 btn btn-primary btn-block text-left' <?php if ($hrefEnable) :
+                                                    $dirEncode = base64url_encode($dir);
+                                                    $dirmodeEncode = base64url_encode("commit"); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?>>
+                                                    Commit
+                                            </a>
+                                        </div>
                                     </div>
                                 <?php endforeach; ?>
                             </div>
