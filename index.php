@@ -190,7 +190,14 @@ $dirlist = array_values(array_filter(scandir("../"), function ($dirname) {
                         <?php else : ?>
 
                             <div class="px-2 pt-0 pb-1 bp-sm-3">
-                                <div class='m-2'>Update:</div>
+                            <div class='m-2 row'>
+                                        <div class="col-9 pl-0">
+                                            Update:
+                                        </div>
+                                        <div class="col-3 pl-0">
+                                            Commit:
+                                        </div>
+                                    </div>
                                 <?php foreach ($dirlist as $key => $dir) :
                                     $dirmode = in_array("package.json", scandir("../$dir"))
                                         ? ((in_array("public", scandir("../$dir")) && in_array("src", scandir("../$dir")))
