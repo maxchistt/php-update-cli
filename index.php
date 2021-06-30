@@ -200,16 +200,16 @@ $dirlist = array_values(array_filter(scandir("../"), function ($dirname) {
                                                 : "node"))
                                         : "other";
                                 ?>
-                                    <div class='m-2'>
-                                        <a <?php if ($hrefEnable) :
+                                    <div class='m-2 row'>
+                                        <a class='col-9' <?php if ($hrefEnable) :
                                                 $dirEncode = base64url_encode($dir);
                                                 $dirmodeEncode = base64url_encode($dirmode); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?> class='btn btn-primary btn-block text-left'>
                                             <span class="badge badge-primary mr-1"><?= ++$key; ?></span><?= $dir; ?>
                                         </a>
-                                        <a <?php if ($hrefEnable) :
+                                        <a class='col-3' <?php if ($hrefEnable) :
                                                 $dirEncode = base64url_encode($dir);
                                                 $dirmodeEncode = base64url_encode("commit"); ?> href='?pname=<?= $dirEncode; ?>&mode=<?= $dirmodeEncode; ?>' <?php endif; ?> class='btn btn-primary btn-block text-left'>
-                                            <span class="badge badge-primary mr-1"><?= ++$key; ?></span> Commit
+                                                Commit
                                         </a>
                                     </div>
                                 <?php endforeach; ?>
